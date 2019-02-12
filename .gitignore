@@ -14,5 +14,6 @@ ios/Runner/GeneratedPluginRegistrant.*
 
 *.iml
 .idea/
+.vscode
 .metadata
 pubspec.lock
