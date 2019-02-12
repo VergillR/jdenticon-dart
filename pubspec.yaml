@@ -1,0 +1,19 @@
+name: jdenticon
+description: A Dart/Flutter implementation of the Jdenticon project.
+version: 1.0.0
+author: Vergill Lemmert <vergill.dev@gmail.com>
+homepage: https://github.com/VergillR
+
+environment:
+  sdk: ">=2.0.0-dev.9.4 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  crypto: ^2.0.6
+  flutter_svg: ^0.10.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  test: ^1.5.3
