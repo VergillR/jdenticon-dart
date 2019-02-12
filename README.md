@@ -15,7 +15,7 @@ It only takes 2 steps to show the identicon in Flutter:
 - Give a string `input` (for example, a name, label or id) to the function `Jdenticon.toSvg(input)` to obtain a raw SVG string:
 
 ```dart
-// please note that Jdenticon is case-sensitive, so the input 'jim' gives another identicon than 'Jim' or 'JIM'
+// please note that Jdenticon is case-sensitive, so 'jim' gives another identicon than 'Jim' or 'JIM'
 String rawSvg = Jdenticon.toSvg('Your input string');
 ```
 
@@ -23,7 +23,7 @@ String rawSvg = Jdenticon.toSvg('Your input string');
 
 ```dart
 // you can store the SVG as a Widget for later use
-Widget identicon = SvgPicture.string(rawSvg, fit: BoxFit.contain, size: 128, width: 128,]);
+Widget identicon = SvgPicture.string(rawSvg, fit: BoxFit.contain, size: 128, width: 128,);
 // or simply use it directly like any other Widget
 Widget card = Card(
   child: Column(
