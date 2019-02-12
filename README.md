@@ -18,7 +18,7 @@ It only takes 2 steps to show the identicon in Flutter:
 String rawSvg = Jdenticon.toSvg(input);
 ```
 
-- You can now render the identicon wherever you want by calling `SvgPicture.string(rawSvg, fit: BoxFit.fill, size: 128, width: 128,])`. This returns a Widget that renders the identicon wherever it is placed in the Widget tree. Use the settings provided by SvgPicture (fit, size, width, alignment, etc.) to change the sizing and behavior:
+- You can now render the identicon wherever you want by calling `SvgPicture.string(rawSvg, fit: BoxFit.fill, size: 128, width: 128,)`. This returns a Widget that renders the identicon wherever it is placed in the Widget tree. Use the settings provided by SvgPicture (fit, size, width, alignment, etc.) to change the sizing and behavior:
 
 ```dart
 // you can store the SVG as a Widget for later use
@@ -41,7 +41,7 @@ Widget card = Card(
 
 Jdenticon comes with an `example.dart` file in the example folder. Run this file in Flutter to see Jdenticon in action.
 Here is a sample:
-![Example](https://github.com/VergillR/jdenticon-dart/example/example_screenshot.png)
+![Example](https://github.com/VergillR/jdenticon-dart/blob/master/example/example_screenshot.png)
 
 ## License
 
