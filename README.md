@@ -12,7 +12,7 @@ Jdenticon is a quick and easy to use library for generating highly recognizable 
 
 Jdenticon uses a string as input (for example: a name, label, or customer id) and hashes this string which then is used to generate a "personalized" icon, which is called an identicon. Identicons can be used for many things, but generally are deployed as an enhanced version of an avatar automatically assigned to an account or client. If you want to learn more about Jdenticon, click [here](https://jdenticon.com).
 
-This library can be used in any Dart project, but this guide assumes Flutter is used to create and display the identicons. Jdenticon exposes the function `toSvg` which is the only function needed to generate an identicon. The result of `toSvg` is a raw SVG string. Flutter cannot natively display raw SVG strings as images. Therefore, Jdenticon comes with the library [flutter_svg](https://pub.dartlang.org/packages/flutter_svg) to easily integrate the rendering of SVG.
+This library can be used in any Dart project, but this guide assumes Flutter is used to create and display the identicons. Jdenticon exposes the function `toSvg` which is the only function needed to generate an identicon. The result of `toSvg` is a raw SVG string. Flutter cannot natively display raw SVG strings as images. Therefore, Jdenticon needs the library [flutter_svg](https://pub.dartlang.org/packages/flutter_svg) to easily integrate the rendering of SVG, so import `flutter_svg` also in your project.
 
 It only takes 2 steps to show the identicon in Flutter:
 - Give a string `input` (for example, a name, label or id) to the function `Jdenticon.toSvg(input)` to obtain a raw SVG string:
@@ -22,7 +22,7 @@ It only takes 2 steps to show the identicon in Flutter:
 String rawSvg = Jdenticon.toSvg('Your input string');
 ```
 
-- You can now render the identicon wherever you want by calling `SvgPicture.string(rawSvg, fit: BoxFit.fill, size: 128, width: 128,)`. This returns a Widget that renders the identicon wherever it is placed in the Widget tree. Use the settings provided by SvgPicture (fit, size, width, alignment, etc.) to change the sizing and behavior:
+- You can now render the identicon wherever you want with `flutter_svg` by calling `SvgPicture.string(rawSvg, fit: BoxFit.fill, size: 128, width: 128,)`. This returns a Widget that renders the identicon wherever it is placed in the Widget tree. Use the settings provided by SvgPicture (fit, size, width, alignment, etc.) to change the sizing and behavior:
 
 ```dart
 // you can store the SVG as a Widget for later use
