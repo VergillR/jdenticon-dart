@@ -12,7 +12,6 @@ class IconGenerator {
   double _size;
   double _x;
   double _y;
-
   double cell;
   num hue;
   List<String> availableColors;
