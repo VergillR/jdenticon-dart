@@ -1,5 +1,5 @@
 import 'package:test/test.dart';
-import 'package:jdenticon_dart/jdenticon.dart';
+import 'package:jdenticon_dart/jdenticon_dart.dart';
 
 void main() {
   const word1 = 'Omega';
