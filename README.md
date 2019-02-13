@@ -1,6 +1,6 @@
 # Jdenticon Dart
 
-![MIT License](https://img.shields.io/github/license/VergillR/jdenticon-dart.svg?style=flat)
+![MIT License](https://img.shields.io/github/license/VergillR/jdenticon-dart.svg?style=flat)](https://github.com/VergillR/jdenticon-dart/blob/master/LICENSE)
 
 
 This is the Dart/Flutter implementation of the [Jdenticon](https://jdenticon.com) project which was created with JavaScript.
