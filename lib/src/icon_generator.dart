@@ -34,12 +34,13 @@ class IconGenerator {
     this._y = y +
         (this._padding + this._size / 2.0 - this.cell * 2.0).floorToDouble();
 
-    this.hue = int.parse(hash.substring(hash.length-7), radix: 16) / 0xffffff;
+    this.hue = int.parse(hash.substring(hash.length - 7), radix: 16) / 0xffffff;
     this.availableColors = colorTheme(hue.toDouble(), config);
     this.graphics = Graphics(renderer);
 
     for (int i = 0; i < 3; i++) {
-      this.index = int.parse(hash.substring(8 + i, 9 + i), radix: 16) % this.availableColors.length;
+      this.index = int.parse(hash.substring(8 + i, 9 + i), radix: 16) %
+          this.availableColors.length;
       if (isDuplicate([0, 4]) || // Disallow dark gray and dark color combo
           isDuplicate([2, 3])) {
         // Disallow light gray and light color combo
@@ -87,19 +88,23 @@ class IconGenerator {
     return false;
   }
 
-  void renderShape(int colorIndex, List<Function> shapes, int index, int rotationIndex, List<List<int>> positions) {
-    int r = rotationIndex != null ? int.parse(this._hash.substring(rotationIndex, rotationIndex + 1), radix: 16) : 0;
-    Function shape = shapes[int.parse(this._hash.substring(index, index + 1), radix: 16) % shapes.length];
-    
-    this._renderer.beginShape(availableColors[selectedColorIndexes[colorIndex]]);
+  void renderShape(int colorIndex, List<Function> shapes, int index,
+      int rotationIndex, List<List<int>> positions) {
+    int r = rotationIndex != null
+        ? int.parse(this._hash.substring(rotationIndex, rotationIndex + 1),
+            radix: 16)
+        : 0;
+    Function shape = shapes[
+        int.parse(this._hash.substring(index, index + 1), radix: 16) %
+            shapes.length];
+
+    this
+        ._renderer
+        .beginShape(availableColors[selectedColorIndexes[colorIndex]]);
     for (int i = 0; i < positions.length; i++) {
-      this.graphics.transform = Transform(
-        this._x + positions[i][0] * cell,
-        this._y + positions[i][1] * cell,
-        cell,
-        ((r++ % 4).toDouble())
-        );
-        shape(this.graphics, cell, i);
+      this.graphics.transform = Transform(this._x + positions[i][0] * cell,
+          this._y + positions[i][1] * cell, cell, ((r++ % 4).toDouble()));
+      shape(this.graphics, cell, i);
     }
     this._renderer.endShape();
   }

@@ -1,7 +1,7 @@
 import './color.dart';
 import './config.dart';
 
-List<String> colorTheme (double h, Config config) {  
+List<String> colorTheme(double h, Config config) {
   return [
     // Dark gray
     Color.hsl(0.0, 0.0, config.grayscaleLightness(0.0)),

@@ -10,7 +10,6 @@ import 'src/svg_renderer.dart';
 import 'src/svg_writer.dart';
 
 class Jdenticon {
-
   Jdenticon();
 
   /// The entry request for which Jdenticon creates a SVG in the form of a SVG-string
@@ -26,23 +25,16 @@ class Jdenticon {
     SvgWriter writer = SvgWriter(size.abs());
     final double s = size.abs().toDouble();
     SvgRenderer renderer = SvgRenderer(writer);
-    IconGenerator(
-      renderer,
-      hash,
-      0.0,
-      0.0,
-      s,
-      padding,
-      getCurrentConfig()
-    );
+    IconGenerator(renderer, hash, 0.0, 0.0, s, padding, getCurrentConfig());
     return writer.convertToString();
   }
 
   /// Returns the current configuration constant settings used by Jdenticon
   static Config getCurrentConfig() {
     final String backColor = "#FFFFFF";
-    
-    Function lightness(String configName, double defaultMin, double defaultMax) {
+
+    Function lightness(
+        String configName, double defaultMin, double defaultMax) {
       List<double> range = [defaultMin, defaultMax];
 
       return (double value) {
@@ -51,6 +43,7 @@ class Jdenticon {
       };
     }
 
-    return Config(0.5, lightness("color", 0.4, 0.8), lightness("grayscale", 0.3, 0.9), Color.cparse(backColor));
+    return Config(0.5, lightness("color", 0.4, 0.8),
+        lightness("grayscale", 0.3, 0.9), Color.cparse(backColor));
   }
 }

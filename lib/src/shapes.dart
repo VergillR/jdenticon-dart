@@ -26,7 +26,8 @@ class Shapes {
       double inner = cell * 0.1;
       inner = inner > 1 ? inner.floorToDouble() : (inner > 0.5 ? 1.0 : inner);
 
-      double outer = cell < 6.0 ? 1.0 : (cell < 8.0 ? 2.0 : (cell * 0.25).floorToDouble());
+      double outer =
+          cell < 6.0 ? 1.0 : (cell < 8.0 ? 2.0 : (cell * 0.25).floorToDouble());
       g.addRectangle(outer, outer, cell - inner - outer, cell - inner - outer);
     },
     (Graphics g, double cell, [int index]) {
@@ -40,7 +41,7 @@ class Shapes {
       if (outer > 3) {
         outer = outer.floorToDouble();
       }
-      
+
       g.addRectangle(0.0, 0.0, cell, cell);
       g.addPolygon([
         Point(outer, outer.floorToDouble()),
@@ -50,12 +51,12 @@ class Shapes {
     },
     (Graphics g, double cell, [int index]) {
       g.addPolygon([
-          Point(0.0, 0.0),
-          Point(cell, 0.0),
-          Point(cell, cell * 0.7),
-          Point(cell * 0.4, cell * 0.4),
-          Point(cell * 0.7, cell),
-          Point(0.0, cell)
+        Point(0.0, 0.0),
+        Point(cell, 0.0),
+        Point(cell, cell * 0.7),
+        Point(cell * 0.4, cell * 0.4),
+        Point(cell * 0.7, cell),
+        Point(0.0, cell)
       ]);
     },
     (Graphics g, double cell, [int index]) {
@@ -70,10 +71,12 @@ class Shapes {
       double inner = cell * 0.14;
       inner = cell < 8 ? inner : inner.floorToDouble();
 
-      double outer = cell < 4 ? 1 : (cell < 6 ? 2 : (cell * 0.35).floorToDouble());
+      double outer =
+          cell < 4 ? 1 : (cell < 6 ? 2 : (cell * 0.35).floorToDouble());
 
       g.addRectangle(0, 0, cell, cell);
-      g.addRectangle(outer, outer, cell - outer - inner, cell - outer - inner, true);
+      g.addRectangle(
+          outer, outer, cell - outer - inner, cell - outer - inner, true);
     },
     (Graphics g, double cell, [int index]) {
       double inner = cell * 0.12;
@@ -114,5 +117,4 @@ class Shapes {
       g.addCircle(m, m, cell - 2 * m);
     }
   ];
-
 }

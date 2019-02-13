@@ -4,5 +4,6 @@ class Config {
   Function grayscaleLightness;
   final String backColor;
 
-  Config(this.saturation, this.colorLightness, this.grayscaleLightness, this.backColor);
+  Config(this.saturation, this.colorLightness, this.grayscaleLightness,
+      this.backColor);
 }

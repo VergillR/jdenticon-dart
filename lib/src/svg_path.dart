@@ -1,6 +1,6 @@
 import 'dart:math' show Point;
 
-int svgValue (num value) {
+int svgValue(num value) {
   return value.floor();
 }
 
@@ -22,6 +22,7 @@ class SvgPath {
     int svgRadius = svgValue(diameter / 2);
     int svgDiameter = svgValue(diameter);
 
-    this.dataString += 'M${svgValue(point.x)} ${svgValue(point.y + diameter / 2)}a$svgRadius,$svgRadius 0 1,$sweepFlag $svgDiameter ,0a$svgRadius,$svgRadius 0 1,$sweepFlag -$svgDiameter,0';
+    this.dataString +=
+        'M${svgValue(point.x)} ${svgValue(point.y + diameter / 2)}a$svgRadius,$svgRadius 0 1,$sweepFlag $svgDiameter ,0a$svgRadius,$svgRadius 0 1,$sweepFlag -$svgDiameter,0';
   }
 }

@@ -13,11 +13,11 @@ class Graphics {
     List<Point> transformedPoints = [];
     int i = invert == true ? points.length - 1 : 0;
     if (!invert) {
-      for (i; i < points.length; i++) {
+      for (; i < points.length; i++) {
         transformedPoints.add(tf.transformPoint(points[i].x, points[i].y));
       }
     } else {
-      for (i; i > -1; i--) {
+      for (; i > -1; i--) {
         transformedPoints.add(tf.transformPoint(points[i].x, points[i].y));
       }
     }
