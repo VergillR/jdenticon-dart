@@ -42,7 +42,8 @@ class Graphics {
         invert);
   }
 
-  void addTriangle(num xx, num yy, num ww, num hh, num r, [bool invert = false]) {
+  void addTriangle(num xx, num yy, num ww, num hh, num r,
+      [bool invert = false]) {
     double x = xx.toDouble();
     double y = yy.toDouble();
     double w = ww.toDouble();
@@ -64,10 +65,9 @@ class Graphics {
     double h = hh.toDouble();
     this.addPolygon([
       Point(x + w / 2.0, y),
-      Point(x + w, y + h / 2.0), 
-      Point(x + w / 2.0, y + h), 
+      Point(x + w, y + h / 2.0),
+      Point(x + w / 2.0, y + h),
       Point(x, y + h / 2.0)
-    ],
-    invert);
+    ], invert);
   }
 }
