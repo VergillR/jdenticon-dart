@@ -1,5 +1,6 @@
 # Jdenticon Dart
 
+![MIT License](https://img.shields.io/github/license/VergillR/jdenticon-dart.svg?style=flat)
 This is the Dart/Flutter implementation of the [Jdenticon](https://jdenticon.com) project which was created with JavaScript.
 Jdenticon is a quick and easy to use library for generating highly recognizable identicons using SVG.
 
