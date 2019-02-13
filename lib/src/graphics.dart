@@ -42,12 +42,11 @@ class Graphics {
         invert);
   }
 
-  void addTriangle(num xx, num yy, num ww, num hh, num rr, [bool invert = false]) {
+  void addTriangle(num xx, num yy, num ww, num hh, num r, [bool invert = false]) {
     double x = xx.toDouble();
     double y = yy.toDouble();
     double w = ww.toDouble();
     double h = hh.toDouble();
-    double r = rr.toDouble();
     List<Point> points = [
       Point(x + w, y),
       Point(x + w, y + h),
