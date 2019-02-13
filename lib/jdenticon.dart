@@ -1,4 +1,4 @@
-library jdenticon;
+library jdenticon_dart;
 
 import 'package:crypto/crypto.dart' show sha1;
 import 'dart:convert' show utf8;

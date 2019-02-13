@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jdenticon/jdenticon.dart';
+import 'package:jdenticon_dart/jdenticon.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 void main() => runApp(Example());
