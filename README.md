@@ -7,7 +7,7 @@ Jdenticon is a quick and easy to use library for generating highly recognizable 
 
 ## Getting Started
 
-Jdenticon uses a string as input (for example: a name, label, or customer id) and then hashes this string which then is used to generate a "personalized" icon, which is called an identicon. Identicons can be used for many things, but generally are deployed as an enhanced version of an avatar automatically assigned to an account or client. If you want to learn more about Jdenticon, click [here](https://jdenticon.com).
+Jdenticon uses a string as input (for example: a name, label, or customer id) and hashes this string which then is used to generate a "personalized" icon, which is called an identicon. Identicons can be used for many things, but generally are deployed as an enhanced version of an avatar automatically assigned to an account or client. If you want to learn more about Jdenticon, click [here](https://jdenticon.com).
 
 This library can be used in any Dart project, but this guide assumes Flutter is used to create and display the identicons. Jdenticon exposes the function `toSvg` which is the only function needed to generate an identicon. The result of `toSvg` is a raw SVG string. Flutter cannot natively display raw SVG strings as images. Therefore, Jdenticon comes with the library [flutter_svg](https://pub.dartlang.org/packages/flutter_svg) to easily integrate the rendering of SVG.
 
