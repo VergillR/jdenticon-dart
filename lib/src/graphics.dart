@@ -54,7 +54,7 @@ class Graphics {
       Point(x, y + h),
       Point(x, y)
     ];
-    points.removeRange(((r ?? 0) % 4) * 2, 2 + ((r ?? 0) % 4) * 2);
+    points.removeAt(r.floor() % 4);
     this.addPolygon(points, invert);
   }
 

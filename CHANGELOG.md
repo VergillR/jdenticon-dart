@@ -1,3 +1,7 @@
+## [1.0.4] - 2019-02-19.
+
+* Reverted one function to the old code
+
 ## [1.0.3] - 2019-02-19.
 
 * Cleaned up code against Jdenticon's code base and tested all
