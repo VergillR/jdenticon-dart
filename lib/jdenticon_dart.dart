@@ -44,6 +44,6 @@ class Jdenticon {
     }
 
     return Config(0.5, lightness("color", 0.4, 0.8),
-        lightness("grayscale", 0.3, 0.9), Color.cparse(backColor));
+        lightness("grayscale", 0.3, 0.9), Color.parse(backColor));
   }
 }

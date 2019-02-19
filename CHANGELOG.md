@@ -1,3 +1,7 @@
+## [1.0.3] - 2019-02-19.
+
+* Cleaned up code against Jdenticon's code base and tested all
+
 ## [1.0.2] - 2019-02-13.
 
 * Final change with dartfmt and README
