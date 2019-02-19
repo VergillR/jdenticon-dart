@@ -1,3 +1,7 @@
+## [1.0.5] - 2019-02-19.
+
+* Run dartfmt
+
 ## [1.0.4] - 2019-02-19.
 
 * Reverted one function to the old code

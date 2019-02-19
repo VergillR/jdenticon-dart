@@ -10,11 +10,10 @@ class Color {
 
   static String hueToRgb(double m1, double m2, double h) {
     double h2 = h < 0 ? h + 6 : h > 6 ? h - 6 : h;
-    return decToHex(255 * (
-        h2 < 1 ? m1 + (m2 - m1) * h2 :
-        h2 < 3 ? m2 :
-        h2 < 4 ? m1 + (m2 - m1) * (4 - h2) :
-        m1));
+    return decToHex(255 *
+        (h2 < 1
+            ? m1 + (m2 - m1) * h2
+            : h2 < 3 ? m2 : h2 < 4 ? m1 + (m2 - m1) * (4 - h2) : m1));
   }
 
   static String rgb(double r, double g, double b) {
@@ -65,9 +64,11 @@ class Color {
   static String correctedHsl(double h, double s, double l) {
     List<double> correctors = [0.55, 0.5, 0.5, 0.46, 0.6, 0.55, 0.55];
     double corrector = correctors[(h * 6 + 0.5).floor()];
-    
-    return Color.hsl(h, s, (
-      l < 0.5 ? l * corrector * 2 : corrector + (l - 0.5) * (1 - corrector) * 2
-    ));
+    return Color.hsl(
+        h,
+        s,
+        (l < 0.5
+            ? l * corrector * 2
+            : corrector + (l - 0.5) * (1 - corrector) * 2));
   }
 }

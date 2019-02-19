@@ -34,7 +34,8 @@ class IconGenerator {
     this._y = y +
         (this._padding + this._size / 2.0 - this.cell * 2.0).floorToDouble();
 
-    this.hue = int.parse(hash.substring(hash.length - 7), radix: 16) / 0xfffffff;
+    this.hue =
+        int.parse(hash.substring(hash.length - 7), radix: 16) / 0xfffffff;
     this.availableColors = colorTheme(hue.toDouble(), config);
     this.graphics = Graphics(renderer);
 
