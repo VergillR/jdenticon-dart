@@ -15,10 +15,10 @@ class SvgRenderer extends Renderer {
 
   void setBackground(String fillColor) {
     final String color =
-        fillColor.length < 9 ? fillColor : fillColor.substring(0, 6);
+        fillColor.length < 9 ? fillColor : fillColor.substring(0, 7);
     final int opacity = fillColor.length < 9
         ? null
-        : int.parse(fillColor.substring(6, 8), radix: 16);
+        : int.parse(fillColor.substring(7, 9), radix: 16);
     this._target.setBackground(color, opacity?.toDouble());
   }
 

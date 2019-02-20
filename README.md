@@ -41,9 +41,26 @@ Widget card = Card(
 );
 ```
 
+## Advanced use
+
+Jdenticon offers customization options to its users to change the appearance of the identicons. You can override any of the configuration settings. For example:
+```dart
+final String rawSvg = Jdenticon.toSvg('Your input string',
+            colorSaturation: 0.48,
+            grayscaleSaturation: 0.48,
+            colorLightnessMinValue: 0.84,
+            colorLightnessMaxValue: 0.84,
+            grayscaleLightnessMinValue: 0.84,
+            grayscaleLightnessMaxValue: 0.84,
+            backColor: '#2a4766ff',
+            hues: [207]);
+```
+The code above will make your identicons look like this:
+![Custom icons](https://github.com/VergillR/jdenticon-dart/blob/master/example/customization_icons.png)
+
 ## Example
 
-Jdenticon comes with an `example.dart` file in the example folder. Run this file in Flutter to see Jdenticon in action.
+Jdenticon comes with a complete `example.dart` file in the example folder. Run this file in Flutter to see Jdenticon in action.
 Here is a sample:
 ![Example](https://github.com/VergillR/jdenticon-dart/blob/master/example/example_screenshot.png)
 

@@ -1,3 +1,8 @@
+## [1.1.0] - 2019-02-19.
+
+* Added the ability to create custom icons with the same icon builder options from Jdenticon
+* Icons now also have a grayscale saturation (in addition to the default color saturation)
+
 ## [1.0.5] - 2019-02-19.
 
 * Run dartfmt

@@ -20,19 +20,52 @@ class Jdenticon {
   /// See the example.dart in the example folder to see how easy this is done in Flutter.
   /// toSvg requires a [message] to be used as base for the identicon. The [size] is optional and there is usually no need to change it because SvgPicture handles the sizing and scaling when the icon is actually rendered.
   /// The [padding] is also optional; the default is no padding and it is generally not needed as SvgPicture or the parent widget controlling it, will set the paddings and margins.
-  static String toSvg(String message, [int size = 64, double padding]) {
+  /// To make customized icons, override the values of the settings you want to change: [colorLightnessMinValue], [colorLightnessMaxValue], [grayscaleLightnessMinValue], [grayscaleLightnessMaxValue], [colorSaturation], [grayscaleSaturation], [backColor], [hues]
+  /// Note that a given [backColor] should be in #rrggbbaa format and [hues] should be an array with one (or more) int values
+  static String toSvg(String message,
+      {int size = 64,
+      double padding,
+      double colorLightnessMinValue = 0.4,
+      double colorLightnessMaxValue = 0.8,
+      double grayscaleLightnessMinValue = 0.3,
+      double grayscaleLightnessMaxValue = 0.9,
+      double colorSaturation = 0.5,
+      double grayscaleSaturation = 0.0,
+      String backColor = '#FFFFFF',
+      List<int> hues}) {
     final String hash = '${sha1.convert(utf8.encode(message))}';
     SvgWriter writer = SvgWriter(size.abs());
     final double s = size.abs().toDouble();
     SvgRenderer renderer = SvgRenderer(writer);
-    IconGenerator(renderer, hash, 0.0, 0.0, s, padding, getCurrentConfig());
+    IconGenerator(
+        renderer,
+        hash,
+        0.0,
+        0.0,
+        s,
+        padding,
+        getCurrentConfig(
+            colorLightnessMinValue: colorLightnessMinValue,
+            colorLightnessMaxValue: colorLightnessMaxValue,
+            grayscaleLightnessMinValue: grayscaleLightnessMinValue,
+            grayscaleLightnessMaxValue: grayscaleLightnessMaxValue,
+            colorSaturation: colorSaturation,
+            grayscaleSaturation: grayscaleSaturation,
+            backColor: backColor,
+            hues: hues));
     return writer.convertToString();
   }
 
   /// Returns the current configuration constant settings used by Jdenticon
-  static Config getCurrentConfig() {
-    final String backColor = "#FFFFFF";
-
+  static Config getCurrentConfig(
+      {double colorLightnessMinValue = 0.4,
+      double colorLightnessMaxValue = 0.8,
+      double grayscaleLightnessMinValue = 0.3,
+      double grayscaleLightnessMaxValue = 0.9,
+      double colorSaturation = 0.5,
+      double grayscaleSaturation = 0.0,
+      String backColor = '#FFFFFF',
+      List<int> hues}) {
     Function lightness(
         String configName, double defaultMin, double defaultMax) {
       List<double> range = [defaultMin, defaultMax];
@@ -43,7 +76,13 @@ class Jdenticon {
       };
     }
 
-    return Config(0.5, lightness("color", 0.4, 0.8),
-        lightness("grayscale", 0.3, 0.9), Color.parse(backColor));
+    return Config(
+        colorSaturation.clamp(0.0, 1.0),
+        grayscaleSaturation.clamp(0.0, 1.0),
+        lightness("color", colorLightnessMinValue, colorLightnessMaxValue),
+        lightness("grayscale", grayscaleLightnessMinValue,
+            grayscaleLightnessMaxValue),
+        Color.parse(backColor),
+        hues);
   }
 }

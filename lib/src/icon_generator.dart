@@ -38,6 +38,7 @@ class IconGenerator {
         int.parse(hash.substring(hash.length - 7), radix: 16) / 0xfffffff;
     this.availableColors = colorTheme(hue.toDouble(), config);
     this.graphics = Graphics(renderer);
+    renderer.setBackground(config.backColor);
 
     for (int i = 0; i < 3; i++) {
       this.index = int.parse(hash.substring(8 + i, 9 + i), radix: 16) %
