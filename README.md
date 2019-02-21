@@ -43,7 +43,8 @@ Widget card = Card(
 
 ## Advanced use
 
-Jdenticon offers customization options to its users to change the appearance of the identicons. You can override any of the configuration settings. For example:
+Jdenticon offers customization options to its users to change the appearance of the identicons. You can override any of the configuration settings. See the [icon designer page](https://jdenticon.com/icon-designer.html) for more details.
+For example:
 ```dart
 final String rawSvg = Jdenticon.toSvg('Your input string',
             colorSaturation: 0.48,

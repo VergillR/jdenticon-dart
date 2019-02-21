@@ -8,11 +8,11 @@ import './transform.dart';
 class IconGenerator {
   String _hash;
   SvgRenderer _renderer;
-  double _padding;
-  double _size;
+  int _padding;
+  int _size;
   double _x;
   double _y;
-  double cell;
+  int cell;
   num hue;
   List<String> availableColors;
   List<int> selectedColorIndexes = [];
@@ -22,12 +22,15 @@ class IconGenerator {
   IconGenerator(SvgRenderer renderer, String hash, double x, double y,
       double size, double padding, Config config) {
     this._renderer = renderer;
+    if (config.backColor != null) {
+      renderer.setBackground(config.backColor);
+    }
     this._hash = hash;
 
-    this._padding = padding != null ? (size * padding).floorToDouble() : 0.0;
-    this._size = size - (this._padding * 2.0);
+    this._padding = (0.5 + size * (padding == null ? 0.08 : padding)).floor();
+    this._size = (size - this._padding * 2).floor().abs();
 
-    this.cell = (this._size / 4.0).floorToDouble();
+    this.cell = (this._size / 4.0).floor();
 
     this._x = x +
         (this._padding + this._size / 2.0 - this.cell * 2.0).floorToDouble();
@@ -38,7 +41,6 @@ class IconGenerator {
         int.parse(hash.substring(hash.length - 7), radix: 16) / 0xfffffff;
     this.availableColors = colorTheme(hue.toDouble(), config);
     this.graphics = Graphics(renderer);
-    renderer.setBackground(config.backColor);
 
     for (int i = 0; i < 3; i++) {
       this.index = int.parse(hash.substring(8 + i, 9 + i), radix: 16) %
@@ -104,9 +106,12 @@ class IconGenerator {
         ._renderer
         .beginShape(availableColors[selectedColorIndexes[colorIndex]]);
     for (int i = 0; i < positions.length; i++) {
-      this.graphics.transform = Transform(this._x + positions[i][0] * cell,
-          this._y + positions[i][1] * cell, cell, ((r++ % 4).toDouble()));
-      shape(this.graphics, cell, i);
+      this.graphics.transform = Transform(
+          this._x + positions[i][0] * cell,
+          this._y + positions[i][1] * cell,
+          cell.toDouble(),
+          ((r++ % 4).toDouble()));
+      shape(this.graphics, cell.toDouble(), i);
     }
     this._renderer.endShape();
   }

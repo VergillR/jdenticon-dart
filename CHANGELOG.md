@@ -1,3 +1,7 @@
+## [1.1.1] - 2019-02-21.
+
+* Resolved an issue when adding padding
+
 ## [1.1.0] - 2019-02-19.
 
 * Added the ability to create custom icons with the same icon builder options from Jdenticon
