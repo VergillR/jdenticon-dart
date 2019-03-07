@@ -10,7 +10,7 @@ class SvgWriter {
   void setBackground(String fillColor, [double opacity]) {
     if (opacity != null) {
       this._s +=
-          '<rect width="$size" height="$size" fill="$fillColor" opacity="$opacity" />';
+          '<rect width="$size" height="$size" fill="$fillColor" opacity="${opacity.toStringAsFixed(2)}" />';
     }
   }
 

@@ -1,3 +1,7 @@
+## [1.2.0] - 2019-03-07.
+
+* Path and opacity are rounded now to the same decimals as Jdenticon's code
+
 ## [1.1.1] - 2019-02-21.
 
 * Resolved an issue when adding padding
