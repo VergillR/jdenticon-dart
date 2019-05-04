@@ -14,7 +14,7 @@ class Config {
     int hue;
     // Check if 'hues' is an array-like object. This way we also ensure that
     // the array is not empty, which would mean no hue restriction.
-    if (hueConfig != null && hueConfig.length > 0) {
+    if (hueConfig != null && hueConfig.isNotEmpty) {
       // originalHue is in the range [0, 1]
       // Multiply with 0.999 to change the range to [0, 1) and then truncate the index.
       hue = hueConfig[(0.999 * originalHue * hueConfig.length).floor()];

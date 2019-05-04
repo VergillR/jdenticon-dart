@@ -82,9 +82,9 @@ class IconGenerator {
   }
 
   bool isDuplicate(List values) {
-    if (values != null && values.indexOf(this.index) >= 0) {
+    if (values != null && values.contains(this.index)) {
       for (int i = 0; i < values.length; i++) {
-        if (this.selectedColorIndexes.indexOf(values[i]) >= 0) {
+        if (this.selectedColorIndexes.contains(values[i])) {
           return true;
         }
       }
