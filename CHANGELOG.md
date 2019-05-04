@@ -1,4 +1,4 @@
-## [1.2.1] - 2019-05-04.
+## [1.2.1+1] - 2019-05-04.
 
 - Removed dependencies on flutter and flutter_svg (they were only required for the test and example code); example code is now shown as a comment block and the test code has been removed
 
