@@ -1,6 +1,6 @@
 name: jdenticon_dart
 description: This is the Dart/Flutter implementation of the Jdenticon project. Jdenticon is a quick and easy to use library for generating highly recognizable identicons using SVG.
-version: 1.2.0
+version: 1.2.1
 author: Vergill Lemmert <vergill.dev@gmail.com>
 homepage: https://github.com/VergillR/jdenticon-dart
 
@@ -8,12 +8,4 @@ environment:
   sdk: ">=2.0.0-dev.9.4 <3.0.0"
 
 dependencies:
-  flutter:
-    sdk: flutter
   crypto: ^2.0.6
-  flutter_svg: ^0.10.3
-
-dev_dependencies:
-  flutter_test:
-    sdk: flutter
-  test: ^1.5.3
