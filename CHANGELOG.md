@@ -1,6 +1,6 @@
 ## [2.0.0-nullsafety.0] - 2021-01-29.
 
-- Added dartanalysis and converted code to nullsafety.
+- Added dartanalysis and converted code to nullsafety
 
 ## [1.2.1+1] - 2019-05-04.
 
