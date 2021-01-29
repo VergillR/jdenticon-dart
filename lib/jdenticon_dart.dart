@@ -21,7 +21,8 @@ class Jdenticon {
   /// toSvg requires a [message] to be used as base for the identicon. The [size] is optional and there is usually no need to change it because SvgPicture handles the sizing and scaling when the icon is actually rendered.
   /// The [padding] is also optional; the default is no padding and it is generally not needed as SvgPicture or the parent widget controlling it, will set the paddings and margins.
   /// To make customized icons, override the values of the settings you want to change: [colorLightnessMinValue], [colorLightnessMaxValue], [grayscaleLightnessMinValue], [grayscaleLightnessMaxValue], [colorSaturation], [grayscaleSaturation], [backColor], [hues]
-  /// Note that a given [backColor] should be in #rrggbbaa format and [hues] should be an array with one (or more) int values
+  /// Note that a given [backColor] should be in #rrggbbaa format and is transparent by default. E.g. to make it opaque white, set it to '#FFFFFFFF'.
+  /// [hues] should be an array with one (or more) int values
   static String toSvg(
     String message, {
     int size = 64,
@@ -32,7 +33,7 @@ class Jdenticon {
     double grayscaleLightnessMaxValue = 0.9,
     double colorSaturation = 0.5,
     double grayscaleSaturation = 0.0,
-    String backColor = '#FFFFFF',
+    String backColor = '',
     List<int> hues = const <int>[],
   }) {
     final String hash = '${sha1.convert(utf8.encode(message))}';
@@ -66,7 +67,7 @@ class Jdenticon {
     double grayscaleLightnessMaxValue = 0.9,
     double colorSaturation = 0.5,
     double grayscaleSaturation = 0.0,
-    String backColor = '#FFFFFF',
+    String backColor = '',
     List<int> hues = const <int>[],
   }) {
     double Function(double) lightness(
