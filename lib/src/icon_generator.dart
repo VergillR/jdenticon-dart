@@ -1,60 +1,55 @@
-import './config.dart';
 import './colortheme.dart';
+import './config.dart';
 import './graphics.dart';
-import './shapes.dart';
+import './shapes.dart' as shapes;
 import './svg_renderer.dart';
 import './transform.dart';
 
 class IconGenerator {
-  String _hash;
-  SvgRenderer _renderer;
-  int _padding;
-  int _size;
-  double _x;
-  double _y;
-  int cell;
-  num hue;
-  List<String> availableColors;
-  List<int> selectedColorIndexes = [];
+  String _hash = '';
+  SvgRenderer? _renderer;
+  int _padding = 0;
+  int _size = 0;
+  double _x = 0.0;
+  double _y = 0.0;
+  int cell = 0;
+  num hue = 0;
+  List<String> availableColors = <String>[];
+  List<int> selectedColorIndexes = <int>[];
   int index = 0;
-  Graphics graphics;
+  Graphics? graphics;
 
   IconGenerator(SvgRenderer renderer, String hash, double x, double y,
       double size, double padding, Config config) {
-    this._renderer = renderer;
-    if (config.backColor != null) {
-      renderer.setBackground(config.backColor);
-    }
-    this._hash = hash;
+    _renderer = renderer;
+    renderer.setBackground(config.backColor);
+    _hash = hash;
 
-    this._padding = (0.5 + size * (padding == null ? 0.08 : padding)).floor();
-    this._size = (size - this._padding * 2).floor().abs();
+    _padding = (0.5 + size * padding).floor();
+    _size = (size - _padding * 2).floor().abs();
 
-    this.cell = (this._size / 4.0).floor();
+    cell = (_size / 4.0).floor();
 
-    this._x = x +
-        (this._padding + this._size / 2.0 - this.cell * 2.0).floorToDouble();
-    this._y = y +
-        (this._padding + this._size / 2.0 - this.cell * 2.0).floorToDouble();
+    _x = x + (_padding + _size / 2.0 - cell * 2.0).floorToDouble();
+    _y = y + (_padding + _size / 2.0 - cell * 2.0).floorToDouble();
 
-    this.hue =
-        int.parse(hash.substring(hash.length - 7), radix: 16) / 0xfffffff;
-    this.availableColors = colorTheme(hue.toDouble(), config);
-    this.graphics = Graphics(renderer);
+    hue = int.parse(hash.substring(hash.length - 7), radix: 16) / 0xfffffff;
+    availableColors = colorTheme(hue.toDouble(), config);
+    graphics = Graphics(renderer);
 
     for (int i = 0; i < 3; i++) {
-      this.index = int.parse(hash.substring(8 + i, 9 + i), radix: 16) %
-          this.availableColors.length;
-      if (isDuplicate([0, 4]) || // Disallow dark gray and dark color combo
-          isDuplicate([2, 3])) {
+      index = int.parse(hash.substring(8 + i, 9 + i), radix: 16) %
+          availableColors.length;
+      if (isDuplicate(<int>[0, 4]) || // Disallow dark gray and dark color combo
+          isDuplicate(<int>[2, 3])) {
         // Disallow light gray and light color combo
-        this.index = 1;
+        index = 1;
       }
-      this.selectedColorIndexes.add(this.index);
+      selectedColorIndexes.add(index);
     }
 
     // Sides
-    renderShape(0, Shapes.outer, 2, 3, [
+    renderShape(0, shapes.outer, 2, 3, [
       [1, 0],
       [2, 0],
       [2, 3],
@@ -65,26 +60,26 @@ class IconGenerator {
       [0, 2]
     ]);
     // Corners
-    renderShape(1, Shapes.outer, 4, 5, [
+    renderShape(1, shapes.outer, 4, 5, [
       [0, 0],
       [3, 0],
       [3, 3],
       [0, 3]
     ]);
     // Center
-    renderShape(2, Shapes.center, 1, null, [
+    renderShape(2, shapes.center, 1, null, [
       [1, 1],
       [2, 1],
       [2, 2],
       [1, 2]
     ]);
-    this._renderer.finish();
+    _renderer!.finish();
   }
 
   bool isDuplicate(List values) {
-    if (values != null && values.contains(this.index)) {
+    if (values.contains(index)) {
       for (int i = 0; i < values.length; i++) {
-        if (this.selectedColorIndexes.contains(values[i])) {
+        if (selectedColorIndexes.contains(values[i])) {
           return true;
         }
       }
@@ -93,26 +88,25 @@ class IconGenerator {
   }
 
   void renderShape(int colorIndex, List<Function> shapes, int index,
-      int rotationIndex, List<List<int>> positions) {
-    int r = rotationIndex != null
-        ? int.parse(this._hash.substring(rotationIndex, rotationIndex + 1),
-            radix: 16)
-        : 0;
-    Function shape = shapes[
-        int.parse(this._hash.substring(index, index + 1), radix: 16) %
-            shapes.length];
+      int? rotationIndex, List<List<int>> positions) {
+    final SvgRenderer? renderer = _renderer;
+    final Graphics? gr = graphics;
+    if (renderer != null && gr != null) {
+      int r = rotationIndex != null
+          ? int.parse(_hash.substring(rotationIndex, rotationIndex + 1),
+              radix: 16)
+          : 0;
+      final Function shape = shapes[
+          int.parse(_hash.substring(index, index + 1), radix: 16) %
+              shapes.length];
 
-    this
-        ._renderer
-        .beginShape(availableColors[selectedColorIndexes[colorIndex]]);
-    for (int i = 0; i < positions.length; i++) {
-      this.graphics.transform = Transform(
-          this._x + positions[i][0] * cell,
-          this._y + positions[i][1] * cell,
-          cell.toDouble(),
-          ((r++ % 4).toDouble()));
-      shape(this.graphics, cell.toDouble(), i);
+      renderer.beginShape(availableColors[selectedColorIndexes[colorIndex]]);
+      for (int i = 0; i < positions.length; i++) {
+        gr.transform = Transform(_x + positions[i][0] * cell,
+            _y + positions[i][1] * cell, cell.toDouble(), (r++ % 4).toDouble());
+        shape(graphics, cell.toDouble(), i);
+      }
+      renderer.endShape();
     }
-    this._renderer.endShape();
   }
 }

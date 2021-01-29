@@ -1,3 +1,7 @@
+## [2.0.0-nullsafety.0] - 2021-01-29.
+
+- Added dartanalysis and converted code to nullsafety.
+
 ## [1.2.1+1] - 2019-05-04.
 
 - Removed dependencies on flutter and flutter_svg (they were only required for the test and example code); example code is now shown as a comment block and the test code has been removed

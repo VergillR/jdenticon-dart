@@ -2,7 +2,7 @@ import './color.dart';
 import './config.dart';
 
 List<String> colorTheme(double hue, Config config) {
-  double h = config.hueFunction(hue);
+  final double h = config.hueFunction(hue);
   return [
     // Dark gray
     Color.correctedHsl(

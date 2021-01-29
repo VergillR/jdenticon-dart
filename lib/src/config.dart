@@ -1,8 +1,8 @@
 class Config {
   final double colorSaturation;
   final double grayscaleSaturation;
-  Function colorLightness;
-  Function grayscaleLightness;
+  double Function(double) colorLightness;
+  double Function(double) grayscaleLightness;
   final String backColor;
   List<int> hues;
 
@@ -10,17 +10,17 @@ class Config {
       this.grayscaleLightness, this.backColor, this.hues);
 
   double hueFunction(double originalHue) {
-    List<int> hueConfig = this.hues;
-    int hue;
+    final List<int> hueConfig = hues;
+    int hue = -1;
     // Check if 'hues' is an array-like object. This way we also ensure that
     // the array is not empty, which would mean no hue restriction.
-    if (hueConfig != null && hueConfig.isNotEmpty) {
+    if (hueConfig.isNotEmpty) {
       // originalHue is in the range [0, 1]
       // Multiply with 0.999 to change the range to [0, 1) and then truncate the index.
       hue = hueConfig[(0.999 * originalHue * hueConfig.length).floor()];
     }
 
-    return hue is int
+    return hue != -1
         ?
         // A hue was specified. We need to convert the hue from
         // degrees on any turn - e.g. 746° is a perfectly valid hue -
