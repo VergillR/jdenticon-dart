@@ -4,43 +4,51 @@ import './svg_path.dart';
 import './svg_writer.dart';
 
 class SvgRenderer extends Renderer {
-  Map<String, SvgPath> _pathsByColor = {};
-  SvgWriter _target;
+  final Map<String, SvgPath> _pathsByColor = {};
+  final SvgWriter _target;
   int size;
   SvgPath _path = SvgPath();
 
-  SvgRenderer(this._target) {
-    this.size = this._target.size;
-  }
+  SvgRenderer(this._target) : size = _target.size;
 
+  @override
   void setBackground(String fillColor) {
-    final String color =
-        fillColor.length < 9 ? fillColor : fillColor.substring(0, 7);
-    final double opacity = fillColor.length < 9
-        ? null
-        : int.parse(fillColor.substring(7, 9), radix: 16) / 255;
-    this._target.setBackground(color, opacity);
+    if (fillColor.length >= 9) {
+      _target.setBackground(fillColor.substring(0, 7),
+          int.parse(fillColor.substring(7, 9), radix: 16) / 255);
+    }
   }
 
+  @override
   void beginShape(String color) {
-    this._path = this._pathsByColor[color] != null
-        ? this._pathsByColor[color]
-        : (this._pathsByColor[color] = SvgPath());
+    final SvgPath? p = _pathsByColor[color];
+    if (p != null) {
+      _path = p;
+    } else {
+      _path = _pathsByColor[color] = SvgPath();
+    }
   }
 
+  @override
   void endShape() {}
 
+  @override
   void addPolygon(List<Point> points) {
-    this._path.addPolygon(points);
+    _path.addPolygon(points);
   }
 
-  void addCircle(Point point, double diameter, bool counterClockwise) {
-    this._path.addCircle(point, diameter, counterClockwise);
+  @override
+  void addCircle(Point point, double diameter,
+      {bool counterClockwise = false}) {
+    _path.addCircle(point, diameter, counterClockwise: counterClockwise);
   }
 
+  @override
   void finish() {
-    for (String color in this._pathsByColor.keys) {
-      this._target.append(color, this._pathsByColor[color]?.dataString);
+    for (final String color in _pathsByColor.keys) {
+      if (_pathsByColor[color] != null) {
+        _target.append(color, _pathsByColor[color]!.dataString);
+      }
     }
   }
 }
