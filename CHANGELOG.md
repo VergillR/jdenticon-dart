@@ -1,3 +1,7 @@
+## [2.0.0] - 2021-03-06.
+
+- Stable nullsafety release
+
 ## [2.0.0-nullsafety.0] - 2021-01-29.
 
 - Added dartanalysis and converted code to nullsafety
