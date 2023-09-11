@@ -1,4 +1,12 @@
 class Config {
+  Config(
+    this.colorSaturation,
+    this.grayscaleSaturation,
+    this.colorLightness,
+    this.grayscaleLightness,
+    this.backColor,
+    this.hues,
+  );
   final double colorSaturation;
   final double grayscaleSaturation;
   double Function(double) colorLightness;
@@ -6,12 +14,9 @@ class Config {
   final String backColor;
   List<int> hues;
 
-  Config(this.colorSaturation, this.grayscaleSaturation, this.colorLightness,
-      this.grayscaleLightness, this.backColor, this.hues);
-
   double hueFunction(double originalHue) {
-    final List<int> hueConfig = hues;
-    int hue = -1;
+    final hueConfig = hues;
+    var hue = -1;
     // Check if 'hues' is an array-like object. This way we also ensure that
     // the array is not empty, which would mean no hue restriction.
     if (hueConfig.isNotEmpty) {
