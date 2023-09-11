@@ -1,10 +1,10 @@
 class SvgWriter {
-  final int size;
-  String _s;
-
   SvgWriter(this.size)
       : _s =
             '<svg xmlns="http://www.w3.org/2000/svg" width="$size" height="$size" viewBox="0 0 $size $size" preserveAspectRatio="xMidYMid meet">';
+  final int size;
+
+  String _s;
 
   void setBackground(String fillColor, double opacity) {
     _s +=

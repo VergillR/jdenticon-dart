@@ -1,13 +1,11 @@
-library jdenticon_dart;
-
 import 'dart:convert' show utf8;
 
 import 'package:crypto/crypto.dart' show sha1;
-import 'src/color.dart';
-import 'src/config.dart';
-import 'src/icon_generator.dart';
-import 'src/svg_renderer.dart';
-import 'src/svg_writer.dart';
+import 'package:jdenticon_dart/src/color.dart';
+import 'package:jdenticon_dart/src/config.dart';
+import 'package:jdenticon_dart/src/icon_generator.dart';
+import 'package:jdenticon_dart/src/svg_renderer.dart';
+import 'package:jdenticon_dart/src/svg_writer.dart';
 
 class Jdenticon {
   Jdenticon();
@@ -36,26 +34,28 @@ class Jdenticon {
     String backColor = '',
     List<int> hues = const <int>[],
   }) {
-    final String hash = '${sha1.convert(utf8.encode(message))}';
-    final SvgWriter writer = SvgWriter(size.abs());
-    final double s = size.abs().toDouble();
-    final SvgRenderer renderer = SvgRenderer(writer);
+    final hash = '${sha1.convert(utf8.encode(message))}';
+    final writer = SvgWriter(size.abs());
+    final s = size.abs().toDouble();
+    final renderer = SvgRenderer(writer);
     IconGenerator(
-        renderer,
-        hash,
-        0.0,
-        0.0,
-        s,
-        padding,
-        getCurrentConfig(
-            colorLightnessMinValue: colorLightnessMinValue,
-            colorLightnessMaxValue: colorLightnessMaxValue,
-            grayscaleLightnessMinValue: grayscaleLightnessMinValue,
-            grayscaleLightnessMaxValue: grayscaleLightnessMaxValue,
-            colorSaturation: colorSaturation,
-            grayscaleSaturation: grayscaleSaturation,
-            backColor: backColor,
-            hues: hues));
+      renderer,
+      hash,
+      0,
+      0,
+      s,
+      padding,
+      getCurrentConfig(
+        colorLightnessMinValue: colorLightnessMinValue,
+        colorLightnessMaxValue: colorLightnessMaxValue,
+        grayscaleLightnessMinValue: grayscaleLightnessMinValue,
+        grayscaleLightnessMaxValue: grayscaleLightnessMaxValue,
+        colorSaturation: colorSaturation,
+        grayscaleSaturation: grayscaleSaturation,
+        backColor: backColor,
+        hues: hues,
+      ),
+    );
     return writer.convertToString();
   }
 
@@ -71,22 +71,29 @@ class Jdenticon {
     List<int> hues = const <int>[],
   }) {
     double Function(double) lightness(
-        String configName, double defaultMin, double defaultMax) {
-      final List<double> range = [defaultMin, defaultMax];
+      String configName,
+      double defaultMin,
+      double defaultMax,
+    ) {
+      final range = <double>[defaultMin, defaultMax];
 
       return (double value) {
-        final double value2 = range[0] + value * (range[1] - range[0]);
+        final value2 = range[0] + value * (range[1] - range[0]);
         return value2 < 0.0 ? 0.0 : (value2 > 1.0 ? 1.0 : value2);
       };
     }
 
     return Config(
-        colorSaturation.clamp(0.0, 1.0),
-        grayscaleSaturation.clamp(0.0, 1.0),
-        lightness("color", colorLightnessMinValue, colorLightnessMaxValue),
-        lightness("grayscale", grayscaleLightnessMinValue,
-            grayscaleLightnessMaxValue),
-        Color.parse(backColor),
-        hues);
+      colorSaturation.clamp(0.0, 1.0),
+      grayscaleSaturation.clamp(0.0, 1.0),
+      lightness('color', colorLightnessMinValue, colorLightnessMaxValue),
+      lightness(
+        'grayscale',
+        grayscaleLightnessMinValue,
+        grayscaleLightnessMaxValue,
+      ),
+      Color.parse(backColor),
+      hues,
+    );
   }
 }
